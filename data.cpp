@@ -111,18 +111,18 @@ void QQDatabase::login() {
     //CLS;
     //bool flag = true;
     //while (flag) {
-    //    cout << "\n请输入QQ账号：";
+    //    cout << "\n请输入QQ账号："<<endl;
     //    int account, i;
     //    cin >> account;
     //    for (i = 0; i < database.size(); i++) {
     //        if (account == database[i].getID()) {
     //            CLS;
-    //            cout << "\n账号登录成功！欢迎用户" << account;
+    //            cout << "\n账号登录成功！欢迎用户" << account<<endl;
     //            flag = false;
     //            break;
     //        }
     //    }
-    //    cout << "\n账号不正确！请检查后重新输入！";
+    //    cout << "\n账号不正确！请检查后重新输入！"<<endl;
     //}
     //此处确认后登录绑定的微信和微博功能待实现
 
@@ -180,18 +180,18 @@ void WeblogDatabase::login() {
     //CLS;
     //bool flag = true;
     //while (flag) {
-    //    cout << "\n请输入QQ账号：";
+    //    cout << "\n请输入QQ账号："<<endl;
     //    int account, i;
     //    cin >> account;
     //    for (i = 0; i < database.size(); i++) {
     //        if (account == database[i].getID()) {
     //            CLS;
-    //            cout << "\n账号登录成功！欢迎用户" << account;
+    //            cout << "\n账号登录成功！欢迎用户" << account<<endl;
     //            flag = false;
     //            break;
     //        }
     //    }
-    //    cout << "\n账号不正确！请检查后重新输入！";
+    //    cout << "\n账号不正确！请检查后重新输入！"<<endl;
     //}
 
     stdlogin(database);
@@ -275,40 +275,112 @@ void WeChatDatabase::login() {
     //CLS;
     //bool flag = true;
     //while (flag) {
-    //    cout << "\n请输入微信账号：";
+    //    cout << "\n请输入微信账号："<<endl;
     //    int account, i;
     //    cin >> account;
     //    for (i = 0; i < database.size(); i++) {
     //        if (account == database[i].getID()) {
     //            CLS;
-    //            cout << "\n账号登录成功！欢迎用户" << account;
+    //            cout << "\n账号登录成功！欢迎用户" << account<<endl;
     //            flag = false;
     //            break;
     //        }
     //    }
-    //    cout << "\n账号不正确！请检查后重新输入！";
+    //    cout << "\n账号不正确！请检查后重新输入！"<<endl;
     //}
 
     stdlogin(database);
 }
 
-template<class T>
-void stdlogin(T& database) {
+template<typename T>
+void stdlogin(T database) {  //尝试使用模板函数实现多平台登录
     CLS;
     bool flag = true;
     while (flag) {
-        cout << "\n请输入账号：";
+        cout << "\n请输入账号：" << endl;
         int account, i;
         cin >> account;
         for (i = 0; i < database.size(); i++) {
             if (account == database[i].getID()) {
                 CLS;
-                cout << "\n账号登录成功！欢迎用户" << account;
+                cout << "\n账号登录成功！欢迎用户" << account << endl;
                 flag = false;
                 break;
             }
         }
-        cout << "\n账号不正确！请检查后重新输入！";
+        cout << "\n账号不正确！请检查后重新输入！" << endl;
     }
 }
 
+void Group::showInfo() {  //展示群信息函数
+    cout << "\n群号：" << groupNum << endl;
+    cout << "\n成员列表：" << endl;
+    if (memberList.empty())
+        cout << "\n此群暂无成员！" << endl;
+    else {
+        for (int i = 0; i < memberList.size(); i++)
+            cout << "\n" << memberList[i] << endl;
+    }
+}
+
+template<typename T>
+void Group::addMember(T &D,int number) {
+
+    bool flag = false;
+    for (int i = 0; i < D.database.size(); i++) {
+        if (number == D.database[i].getID()) {
+            flag = true;
+            break;
+        }
+    }
+    if (flag) {
+        for (int j = 0; j < memberList.size(); j++) {
+            if (memberList[j] == number) {
+                cout << "\n该用户已经是群组成员！" << endl;
+                return;
+            }
+        }
+        memberList.push_back(number);
+        cout << "\n成员添加成功！" << endl;
+        return;
+    }
+    else
+        cout << "该账号不存在！" << endl;
+}
+
+void Group::deleteMember(int number) {
+
+    bool flag = false;
+    for (int i = 0; i < memberList.size(); i++) {
+        if (memberList[i] == number) {
+            memberList.erase(memberList.begin() + i);
+            flag = true;
+            cout << "\n删除成功！" << endl;
+            break;
+        }
+    }
+    if (!flag)
+        cout << "\n此账号不在该群中！" << endl;
+}
+
+void GroupData::createNewGroup() {
+    int num;
+    bool flag = false;
+    CLS;
+    while (!flag) {
+        flag = true;
+        cout << "\n请输入想创建的群号：" << endl;
+        cin >> num;
+        for (int i = 0; i < database.size(); i++) {
+            if (num == database[i].getGroupNum()) {
+                cout << "\n此群号已被注册！" << endl;
+                flag = false;
+            }
+        }
+    }
+    if (flag) {
+        setNewGroup(num);
+        CLS;
+        cout << "已创建群" << num << endl;
+    }
+}

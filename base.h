@@ -60,11 +60,11 @@ public:
 		return friendList;
 	}
 	//以下是功能函数
-	void addFriend(const int ID) {}  //添加好友
+	void addFriend(const int ID);  //添加好友
 
-	void deleteFriend(const int ID) {}  //删除好友
+	void deleteFriend(const int ID);  //删除好友
 
-	void showFriendList(){}  //显示好友列表
+	void showFriendList();  //显示好友列表
 };
 
 class QQ: public Tencent{  //QQ类，继承基础类，包含通用功能和独特功能
@@ -102,13 +102,13 @@ public:
 	vector<int> getGroupList() {
 		return groupList;
 	}
-	void showInfo() { }  //显示当前QQ信息
+	void showInfo();  //显示当前QQ信息
 
-	void showGroupList(){}  //显示群组列表
+	void showGroupList();  //显示群组列表
 
-	void enterGroup(const int groupID) {}  //加入一个群
+	void enterGroup(const int groupID);  //加入一个群
 
-	void exitGroup(int groupID) {}  //退出一个群
+	void exitGroup(int groupID);  //退出一个群
 };
 
 class Weblog : public Tencent {
@@ -166,11 +166,11 @@ public:
 		qqID = qq;
 	}
 
-	void showInfo() { }  //显示当前微信信息
+	void showInfo();  //显示当前微信信息
 
-	void showGroupList() {}  //显示群组列表
+	void showGroupList();  //显示群组列表
 
-	void enterGroup(const int groupID) {}  //加入一个群
+	void enterGroup(const int groupID);  //加入一个群
 
-	void exitGroup(int groupID) {}  //退出一个群
+	void exitGroup(int groupID);  //退出一个群
 };
