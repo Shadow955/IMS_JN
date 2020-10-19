@@ -168,3 +168,21 @@ void WeChat::exitGroup(const int groupID) {  //微信:退出一个群函数
     if (!flag)
         cout << "\n操作失败!您还未进入该群!" << endl;
 }
+
+template<typename T>
+void Tencent::checkCommonFriend(T other) {
+    vector<int> otherFriendList = other.getFriendList();
+    int count = 0;
+    cout << "\t\t\t\t共同好友有:" << endl;
+    for (int i = 0; i < friendList.size(); i++) {
+        int one = friendList[i];
+        for (int j = 0; j < otherFriendList.size(); j++) {
+            if (otherFriendList[j] == one) {
+                cout << "\t\t\t\t" << one << endl;
+                count++;
+                break;
+            }
+        }
+    }
+    cout << "\t\t\t\t共" << count << "位共同好友。" << endl;
+}

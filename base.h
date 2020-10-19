@@ -65,6 +65,9 @@ public:
 	void deleteFriend(const int ID);  //删除好友
 
 	void showFriendList();  //显示好友列表
+
+	template<typename T>
+	void checkCommonFriend(T);
 };
 
 class QQ: public Tencent{  //QQ类，继承基础类，包含通用功能和独特功能
@@ -117,7 +120,7 @@ private:
 	bool isHaveWebolg;
 
 public:
-	Weblog(QQ & qq) {  //含参构造函数，仅在开通了微博时执行
+	Weblog(QQ  qq) {  //含参构造函数，仅在开通了微博时执行
 		ID = qq.getID();
 		nickname = qq.getName();
 		isHaveWebolg = true;  //是否开通了微博
@@ -125,7 +128,7 @@ public:
 	Weblog(){}  //重载无参构造函数，默认执行此构造函数
 
 	//以下是设定函数
-	void setWeblogID(QQ & qq) {
+	void setWeblogID(QQ  qq) {
 		ID=qq.getID();
 	}
 	void setisHaveWeblog(bool is) {
@@ -135,7 +138,7 @@ public:
 	bool getIsHaveWeblog() {
 		return isHaveWebolg;
 	}
-	void showInfo() { }  //显示当前微博信息
+	void showInfo();  //显示当前微博信息
 };
 
 class WeChat : public Tencent {
@@ -145,7 +148,7 @@ private:
 	vector<int> groupList;  //群组列表，使用vector实现
 
 public:
-	WeChat(QQ& qq) {  //有参构造函数，仅当绑定了QQ时执行
+	WeChat(QQ qq) {  //有参构造函数，仅当绑定了QQ时执行
 		qqID = qq.getID();
 	}
 
