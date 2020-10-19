@@ -56,8 +56,8 @@ public:
 };
 
 
-template<typename T>
-void stdlogin(T database);  //尝试使用函数模板实现多平台的登录
+//template<typename T>
+//void stdlogin(T database);  //尝试使用函数模板实现多平台的登录
 
 
 class Group {
@@ -106,4 +106,9 @@ public:
 		database.push_back(newGroup);
 	}
 
+	void showAllGroup() {  //显示目前所有群组
+		system("cls");
+		for (int i = 0; i < database.size(); i++)
+			cout << database[i].getGroupNum() << endl;
+	}
 };

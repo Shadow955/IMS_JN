@@ -141,6 +141,7 @@
   <ItemGroup>
     <ClInclude Include="base.h" />
     <ClInclude Include="data.h" />
+    <ClInclude Include="UI.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="base.cpp" />
