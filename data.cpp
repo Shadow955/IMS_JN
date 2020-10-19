@@ -8,7 +8,7 @@
 
 using namespace std;
 
-void QQDatabase::signup(WeblogDatabase &BD,WeChatDatabase &WCD) {  //×¢²áĞÂQQºÅº¯Êı
+void QQDatabase::signup(WeblogDatabase BD,WeChatDatabase WD) {  //×¢²áĞÂQQºÅº¯Êı
 
     bool flag = false;
     //vector<QQ>::iterator end;
@@ -62,8 +62,8 @@ void QQDatabase::signup(WeblogDatabase &BD,WeChatDatabase &WCD) {  //×¢²áĞÂQQºÅº
             cout << "\nÇëÊäÈëÄúµÄÎ¢ĞÅºÅ£º" << endl;
             cin >> weChatID;
             int i;
-            for (i = 0; i < WCD.database.size(); i++) {
-                if (weChatID == WCD.database[i].getID()) {
+            for (i = 0; i < WD.database.size(); i++) {
+                if (weChatID == WD.database[i].getID()) {
                     flag2 = true;
                     break;
                 }
@@ -107,7 +107,7 @@ void QQDatabase::setup(int ID, string nickname, string birthDate, int age,
     database.push_back(newAccount);
 }
 
-void QQDatabase::login() {
+int QQDatabase::login() {
     //CLS;
     //bool flag = true;
     //while (flag) {
@@ -126,7 +126,8 @@ void QQDatabase::login() {
     //}
     //´Ë´¦È·ÈÏºóµÇÂ¼°ó¶¨µÄÎ¢ĞÅºÍÎ¢²©¹¦ÄÜ´ıÊµÏÖ
 
-    stdlogin(database);
+    int ID = stdlogin(database);
+    return ID;
 }
 
 void WeblogDatabase::signup() {
@@ -293,7 +294,7 @@ void WeChatDatabase::login() {
 }
 
 template<typename T>
-void stdlogin(T database) {  //³¢ÊÔÊ¹ÓÃÄ£°åº¯ÊıÊµÏÖ¶àÆ½Ì¨µÇÂ¼
+int stdlogin(T database) {  //³¢ÊÔÊ¹ÓÃÄ£°åº¯ÊıÊµÏÖ¶àÆ½Ì¨µÇÂ¼
     CLS;
     bool flag = true;
     while (flag) {
@@ -308,8 +309,9 @@ void stdlogin(T database) {  //³¢ÊÔÊ¹ÓÃÄ£°åº¯ÊıÊµÏÖ¶àÆ½Ì¨µÇÂ¼
                 break;
             }
         }
-        cout << "\nÕËºÅ²»ÕıÈ·£¡Çë¼ì²éºóÖØĞÂÊäÈë£¡" << endl;
+        cout << "\nÕËºÅ²»´æÔÚ£¡Çë¼ì²éºóÖØĞÂÊäÈë£¡" << endl;
     }
+    return account;
 }
 
 void Group::showInfo() {  //Õ¹Ê¾ÈºĞÅÏ¢º¯Êı
@@ -382,5 +384,214 @@ void GroupData::createNewGroup() {
         setNewGroup(num);
         CLS;
         cout << "ÒÑ´´½¨Èº" << num << endl;
+    }
+}
+
+int QQDatabase::QQmain() {
+    int choose = 0;
+
+    cout << "\n\n\n------------»¶Ó­Ê¹ÓÃJNQQ£¡-----------" << endl;
+    cout << "\n1:<QQÕËºÅµÇÂ½>" << endl;
+    cout << "\n2:<²é¿´ËùÓĞÒÑ×¢²áµÄQQºÅ>" << endl;
+    cout << "\n3:<×¢²áĞÂQQºÅ>" << endl;
+    cout << "\n0:<·µ»ØÉÏÒ»²ã>" << endl;
+    cout << "\n×¢:½öÉÏÊö³öÏÖµÄ´¿Êı×ÖÊäÈëÓĞĞ§£¡ÆäËûÊäÈë¾ùÎª·Ç·¨ÊäÈë£¡\n\n" << endl;
+    cout << "ÇëÊäÈëÄúµÄÑ¡Ôñ£º";
+    cin >> choose;
+    if (choose >= 0 && choose <= 3) {
+        system("cls");
+        return choose;
+    }
+    else {
+        system("cls");
+        cout << "\n\t\t¾¯¸æ:ÄúµÄÊäÈëÓĞÎó£¡ÇëÖØĞÂÊäÈë£¡\n" << endl;
+        QQmain();
+    }
+}
+
+int QQDatabase::QQservice(WeblogDatabase BD,WeChatDatabase WD) {
+    int choose;
+    int result = 10;
+    choose = QQmain();
+    switch (choose) {
+    case 1: {
+        int ID = login();
+        QQclient(ID,BD,WD);
+        break;
+        }
+    case 2: {
+        CLS;
+        cout << "\n\n\n------------QQÕËºÅĞÅÏ¢ÁĞ±í-----------" << endl;
+        for (int i = 0; i < database.size(); i++)
+            cout << database[i].getID() << ":" << database[i].getName() << endl;
+        QQservice(BD, WD);
+        break;
+    }
+    case 3: {
+        signup(BD, WD);
+        break;
+    }
+    }
+}
+
+int QQDatabase::QQclient(int ID,WeblogDatabase &BD,WeChatDatabase &WD) {
+    bool flag = false;
+    int choose;
+    int result = 10;
+    for (int i = 0; i < database.size(); i++) {      //²éÕÒ²¢ÏÔÊ¾QQÕËºÅĞÅÏ¢
+        if (database[i].getID() == ID) {
+            cout << "\n\n\n------------ÕÊºÅĞÅÏ¢-----------" << endl;
+            database[i].showInfo();
+            choose = QQUI();
+
+            switch (choose) {
+
+            case 1: {         //¸ü¸ÄêÇ³Æ
+                CLS;
+                cout << "\tÇëÊäÈë¸ü¸ÄÖ®ºóµÄêÇ³Æ£º";
+                string name;
+                cin >> name;
+                database[i].setName(name);
+                QQclient(ID, BD, WD);
+                break;
+            }
+
+            case 2: {         //Ìí¼ÓºÃÓÑ
+                CLS;
+                cout << "\tÇëÊäÈëÄúÒªÌí¼ÓµÄQQºÃÓÑÕÊºÅ£º";
+                int account;
+                cin >> account;
+                database[i].addFriend(account);
+                break;
+            }
+
+            case 3: {             //±È½Ï¹²Í¬ºÃÓÑ
+                system("cls");
+                cout << "\tÇëÊäÈëÄúÏëÒª±È½Ï¹²Í¬ºÃÓÑµÄQQÕÊºÅ£º";
+                int account;
+                bool flag = false;
+                cin >> account;
+                for (int j = 0; j < database.size(); j++) {
+                    if (database[j].getID() == account) {
+                        database[i].checkQQCommonFriend(client[j]);
+                        flag = true;
+                        break;
+                    }
+                }
+                if (flag)
+                    QQclient(ID, BD, WD);
+                else {
+                    cout << "\nÄúÊäÈëµÄQQÕÊºÅ²¢Î´ÔÚ±¾ÏµÍ³ÖĞ×¢²á¹ı£¬ÇëÄúºËÊµÄúµÄÊäÈë£¡" << endl;
+                    QQclient(ID, BD, WD);
+                }
+                break;
+            }
+
+            case 4: {         //É¾³ıºÃÓÑ
+                system("cls");
+                cout << "\nÇëÊäÈëÄúÒªÉ¾³ıµÄºÃÓÑµÄQQÕÊºÅ£º";
+                int account;
+                cin >> account;
+                database[i].deleteFriend(account);
+                QQclient(ID, BD, WD);
+                break;
+            }
+
+            case 5: {             //¼ÓÈº
+                system("cls");
+                cout << "\tÇëÊäÈëÄúÏë¼ÓÈëµÄÈºµÄÈººÅ£º";
+                int groupNumber;
+                cin >> groupNumber;
+                database[i].enterGroup(groupNumber);
+                QQclient(ID, BD, WD);
+                break;
+            }
+
+            case 6: {             //ÍËÈº
+                system("cls");
+                cout << "\tÇëÊäÈëÄúÒªÍË³öµÄÈººÅ£º";
+                int groupNumber;
+                cin >> groupNumber;
+                database[i].exitGroup(groupNumber);
+                QQclient(ID, BD, WD);
+                break;
+            }
+
+            case 7: {             //¿ªÍ¨Î¢²©
+                bool flag = false;
+                if (database[i].ifSetWebolg())
+                    cout << "\n´ËÕÊºÅÒÑ¾­¿ªÍ¨¹ıÎ¢²©ÁË£¡" << endl;
+                else {
+                    for (int j = 0; j < WD.database.size(); j++) {
+                        if (BD.database[j].getID() == ID) {
+                            BD.database[j].setisHaveWeblog(true);
+                            flag = true;
+                            break;
+                        }
+                    }
+                    if (!flag)
+                        Weblog w(database[i]);
+
+                    database[i].linkToWebolg();
+                    cout << "\n¹§Ï²ÄúÒÑ¾­³É¹¦¿ªÍ¨Î¢²©ÁË£¡" << endl;
+                }
+                QQclient(ID, BD, WD);
+                break;
+            }
+
+            case 8: {             //¿ªÍ¨Î¢ĞÅ
+                CLS;
+                cout << "\nÇëÊäÈëÄúÒª°ó¶¨µÄÎ¢ĞÅÕÊºÅ£º";
+                int account;
+                cin >> account;
+                database[i].linkToWechat(account);
+                cout << "\n¹§Ï²Äú£¡ÕËºÅ°ó¶¨³É¹¦£¡" << endl;
+                QQclient(ID, BD, WD);
+                break;
+            }
+
+            case 0: {             //·µ»ØÉÏÒ»²ã
+                CLS;
+                result = QQUI();
+                break;
+            }
+            };
+            flag = true;
+            break;
+        }
+    }
+    if (!flag) {
+        cout << "\t²éÎŞ´ËÈË£¡ÇëÈ·ÈÏÄúµÄQQÕÊºÅÊÇ·ñÌîĞ´ÕıÈ·£¡" << endl;
+        QQclient(ID,BD, WD);
+    }
+
+    return result;
+}
+
+
+int QQDatabase::QQUI() {
+    int choose = 0;
+
+    cout << "\n\n\n------------QQÕÊºÅ·şÎñÏµÍ³-----------" << endl;
+    cout << "\n1:<ĞŞ¸ÄêÇ³Æ>" << endl;
+    cout << "\n2:<Ìí¼ÓºÃÓÑ>" << endl;
+    cout << "\n3:<±È½ÏÓëËûÈËµÄ¹²Í¬ºÃÓÑ>" << endl;
+    cout << "\n4:<É¾³ıºÃÓÑ>" << endl;
+    cout << "\n5:<¼ÓÈëÒ»¸öÈº>" << endl;
+    cout << "\n6:<ÍË³öÒ»¸öÈº>" << endl;
+    cout << "\n7:<°ó¶¨Î¢²©>" << endl;
+    cout << "\n8:<°ó¶¨Î¢ĞÅ>" << endl;
+    cout << "\n0:<·µ»ØÉÏÒ»²ã>" << endl;
+    cout << "\n×¢:½öÉÏÊö³öÏÖµÄ´¿Êı×ÖÊäÈëÓĞĞ§£¡ÆäËûÊäÈë¾ùÎª·Ç·¨ÊäÈë£¡\n\n" << endl;
+    cout << "\nÇëÊäÈëÄúµÄÑ¡Ôñ£º";
+    cin >> choose;
+    if (choose >= 0 && choose <= 8) {
+        CLS;
+        return choose;
+    }
+    else {
+        CLS;
+        cout << "\n¾¯¸æ:ÄúµÄÊäÈëÓĞÎó£¡ÇëÖØĞÂÊäÈë£¡\n" << endl;
+        QQUI();
     }
 }

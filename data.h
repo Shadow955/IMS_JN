@@ -21,9 +21,19 @@ public:
 
 	vector<QQ> database;  //构建一个模拟数据库，储存所有QQ号
 
-	void signup(WeblogDatabase& BD, WeChatDatabase& WCD) {}  //注册账号函数
+	int QQmain();  //QQ主界面
 
-	void login();  //登录函数
+	int QQservice(WeblogDatabase, WeChatDatabase);  //QQ功能函数
+
+	int QQclient(int ID, WeblogDatabase& BD, WeChatDatabase& WD);
+
+	//int QQclient(int,WeblogDatabase,WeChatDatabase);
+
+	int QQUI();
+
+	void signup(WeblogDatabase , WeChatDatabase);  //注册账号函数
+
+	int login();  //登录函数
 
 	void setup(int ID, string nickname, string birthDate, int age,
 		string location, bool blog, int weChatID, WeblogDatabase blogD); //初始化一个新账号（用于注册时）
