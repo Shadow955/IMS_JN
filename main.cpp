@@ -1,5 +1,4 @@
 #include<iostream>
-#include"data.h"
 #include"base.h"
 
 using namespace std;

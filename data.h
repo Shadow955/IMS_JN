@@ -7,9 +7,6 @@
 
 using namespace std;
 
-class QQ;
-class WeChat;
-class Weblog;
 
 int mainUI() {
 	CLS;      //ÇåÆÁº¯Êý
