@@ -13,7 +13,6 @@ class QQDatabase;
 class WeblogDatabase;
 class WeChatDatabase;
 
-//较短函数直接在类中定义，较长函数只在此声明，在对应cpp文件中定义
 
 class Tencent {  //基类，包含三款软件的通用功能
 
@@ -170,11 +169,9 @@ public:
 
 	int QQservice(WeblogDatabase, WeChatDatabase);  //QQ功能函数
 
-	int QQclient(int ID, WeblogDatabase BD, WeChatDatabase WD);
+	int QQclient(int ID, WeblogDatabase BD, WeChatDatabase WD);  //QQ客户端函数
 
-	//int QQclient(int,WeblogDatabase,WeChatDatabase);
-
-	int QQUI();
+	int QQUI();  //QQ客户端界面
 
 	void signup(WeblogDatabase, WeChatDatabase);  //注册账号函数
 
@@ -261,7 +258,7 @@ public:
 
 	vector<Group> database;  //用向量模拟群组数据库
 
-	void createNewGroup();
+	void createNewGroup();  //新建一个群组
 
 	void setNewGroup(int number);  //使用数据初始化设定新群
 

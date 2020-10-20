@@ -14,6 +14,8 @@ Tencent::Tencent() {
     birthDate = "暂无数据";
     location = "未知";
 }
+
+//以下是设定、初始化账号信息函数
 void Tencent::setID(int in) {
     ID = in;
 }

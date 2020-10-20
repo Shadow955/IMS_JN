@@ -18,25 +18,25 @@ int main() {
     QQ test2;
     QQ test3;
 
-    test1.setID(55160602);
-    test2.setID(55160603);
-    test3.setID(55160604);
+    test1.setID(55190812);
+    test2.setID(55190813);
+    test3.setID(55190814);
 
-    test1.setName("denghan");
-    test2.setName("louruiqi");
-    test3.setName("jianghuiyun");
+    test1.setName("JN");
+    test2.setName("WSX");
+    test3.setName("LYN");
 
-    test1.setBirthDate("1998-01-22");
-    test2.setBirthDate("1998-01_01");
-    test3.setBirthDate("1998-07-17");
+    test1.setBirthDate("2000-01-22");
+    test2.setBirthDate("2001-01_01");
+    test3.setBirthDate("2001-07-17");
 
     test1.setAge(1);
     test2.setAge(2);
     test3.setAge(3);
 
-    test1.setLocation("heilongjiang");
-    test2.setLocation("changchun");
-    test3.setLocation("guangdong");
+    test1.setLocation("anshan,liaoning");
+    test2.setLocation("shihezi,xinjiang");
+    test3.setLocation("xinxiang,henan");
 
     test1.linkToWebolg();
     test2.linkToWebolg();
@@ -46,12 +46,12 @@ int main() {
     test2.linkToWechat(100002);
     test3.linkToWechat(100003);
 
-    test1.addFriend(55160603);
-    test1.addFriend(55160604);
-    test2.addFriend(55160602);
-    test2.addFriend(55160604);
-    test3.addFriend(55160602);
-    test3.addFriend(55160604);
+    test1.addFriend(55190813);
+    test1.addFriend(55190814);
+    test2.addFriend(55190812);
+    test2.addFriend(55190814);
+    test3.addFriend(55190813);
+    test3.addFriend(55190812);
 
     test1.enterGroup(1001);
     test1.enterGroup(1002);
@@ -70,12 +70,12 @@ int main() {
     Weblog test5(test2);
     Weblog test6(test3);
 
-    test4.addFriend(55160603);
-    test4.addFriend(55160604);
-    test5.addFriend(55160602);
-    test5.addFriend(55160604);
-    test6.addFriend(55160602);
-    test6.addFriend(55160603);
+    test4.addFriend(55190813);
+    test4.addFriend(55190814);
+    test5.addFriend(55190812);
+    test5.addFriend(55190814);
+    test6.addFriend(55190812);
+    test6.addFriend(55190813);
 
     weibo.database.push_back(test4);
     weibo.database.push_back(test5);
@@ -89,9 +89,9 @@ int main() {
     test8.setID(10102);
     test9.setID(10103);
 
-    test7.setName("denghan");
-    test8.setName("louruiqi");
-    test9.setName("jianghuiyun");
+    test7.setName("wx_JN");
+    test8.setName("wx_WSX");
+    test9.setName("wx_LYN");
 
     test7.addFriend(10102);
     test7.addFriend(10103);
@@ -155,7 +155,7 @@ int main() {
 
         case 0: {
             CLS;
-            cout << "\t感谢您使用本系统！期待您的下一次使用！\n\t（本次生成的所有账号信息都存放在了根目录下的对应TXT文件中）" << endl;
+            cout << "\t感谢您使用本系统！" << endl;
             //以下是各类账户信息的文件保存
             //qq.writeToFile();
             //weibo.writeToFile();
