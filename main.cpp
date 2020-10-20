@@ -10,9 +10,7 @@ int main() {
     WeChatDatabase weixin;
     GroupData group;
 
-    //接下来的一些代码是预先创造出一些对象，保证系统内有一定的用户，可以正常使用
-    /*另注：由于程序使用了vector，使得文件读入和序列化增添了不少难度，比较方便的boost类库序列化还需要
-    加载Boost类库，比较费时，所以采用了固化在程序代码中，虽然死板一些，但是省去了很多不必要的麻烦*/
+    //预先创造出一些对象，保证系统内有一定的用户，可以正常使用
 
     QQ test1;
     QQ test2;
@@ -148,10 +146,10 @@ int main() {
             break;
         }
 
-        //case 4: {                 //群组管理部分
-        //    CLS;
-        //    result = group.selectGroup(qq);
-        //}
+        case 4: {                 //群组管理部分
+            CLS;
+            cout << "\n本功能尚未完善！正在添加中！\n";
+        }
 
         case 0: {
             CLS;
